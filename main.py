@@ -59,6 +59,6 @@ async def on_message(message):
         if len(msg) == 2 and msg[1].isdigit():
             await message.channel.purge(limit=int(msg[1]) + 1)
         else:
-            await message.channel.send("Wrong command sia...")
+            await message.channel.send("Nononono... 你要打 _delete 然後要刪多少個， like this: _delete 2")
 
 client.run(token)
