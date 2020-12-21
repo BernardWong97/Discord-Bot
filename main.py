@@ -24,7 +24,7 @@ berd_id = f"<@!353165739852693506>"
 neng_id = f"<@!474156371147882508>"
 shanni_id = f"<@!356045052604317697>"
 
-alarm = "16:50"
+alarm = "16:00"
 
 
 async def time_check():
