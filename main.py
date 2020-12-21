@@ -1,6 +1,8 @@
 import os
 import discord
 import random
+import asyncio
+from datetime import datetime
 
 
 def read_token():
@@ -9,12 +11,7 @@ def read_token():
         return lines[0].strip()
 
 
-def get_all_members_ids(guild):
-    return guild.member_count
-
-
 token = read_token()
-
 client = discord.Client()
 
 quotes = {"mentionNeng": "叫我的僕人做莫",
@@ -22,14 +19,43 @@ quotes = {"mentionNeng": "叫我的僕人做莫",
           "reply": "Reply 你毛啊",
           "mentionBot": ["Yes~ 寶貝？", "什麽事情啊~ 親？", "叫我嗎~ 親愛的？"]}
 
-berdId = f"<@!353165739852693506>"
-nengId = f"<@!474156371147882508>"
-shanniId = f"<@!356045052604317697>"
+channel_id = 692783419553218570
+berd_id = f"<@!353165739852693506>"
+neng_id = f"<@!474156371147882508>"
+shanni_id = f"<@!356045052604317697>"
+
+alarm = "00:00"
+
+
+async def time_check():
+    await client.wait_until_ready()
+    channel = client.get_channel(channel_id)
+    alarm_bool = True
+
+    while not client.is_closed():
+        try:
+            message = "@everyone 起來小便咯!"
+            time_format = "%H:%M"
+            now = datetime.strftime(datetime.now(), time_format)
+            diff = (datetime.strptime(alarm, time_format) - datetime.strptime(now, time_format)).total_seconds()
+
+            if diff == 0 and alarm_bool:
+                alarm_bool = False
+                await channel.send(message)
+
+            if diff != 0:
+                alarm_bool = True
+
+            await asyncio.sleep(1)
+        except Exception as e:
+            print(str(e))
+            await asyncio.sleep(1)
 
 
 @client.event
 async def on_ready():
-    print('We have logged in as {0.user}'.format(client))
+    print('Bot online as {0.user}'.format(client))
+    client.loop.create_task(time_check())
 
 
 @client.event
@@ -38,17 +64,17 @@ async def on_message(message):
     if message.author == client.user:
         return
 
-    if nengId in message.content:
+    if neng_id in message.content:
         await message.channel.send(quotes["mentionNeng"])
 
-    if shanniId in message.content:
+    if shanni_id in message.content:
         await message.channel.send(quotes["mentionShan"])
 
     if "reply" in message.content.lower().split():
         await message.channel.send(quotes["reply"])
 
     if client.user.mentioned_in(message):
-        if f"<@!{message.author.id}>" != nengId:
+        if f"<@!{message.author.id}>" != neng_id:
             await message.channel.send(random.choice(list(quotes["mentionBot"])))
         else:
             await message.channel.send("滾！")
@@ -60,5 +86,6 @@ async def on_message(message):
             await message.channel.purge(limit=int(msg[1]) + 1)
         else:
             await message.channel.send("Nononono... 你要打 _delete 然後要刪多少個， like this: _delete 2")
+
 
 client.run(token)
