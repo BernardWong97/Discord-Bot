@@ -79,6 +79,19 @@ async def on_message(message):
         else:
             await message.channel.send("滾！")
 
+    if message.content.startswith("_send"):
+        cmd = message.content.split()
+        msg = " ".join(cmd[2:])
+
+        try:
+            if len(cmd) > 2 and cmd[1].isdigit():
+                send_to_chnl = client.get_channel(int(cmd[1]))
+                await send_to_chnl.send(msg)
+            else:
+                await message.channel.send("Wrong command. Need _send [channel id] [message]")
+        except Exception:
+            await message.channel.send("No such channel exists.")
+
     if message.content.startswith("_delete"):
         msg = message.content.split()
 
