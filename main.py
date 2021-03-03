@@ -1,3 +1,5 @@
+#coding=utf-8
+
 import os
 import discord
 import random
@@ -16,8 +18,8 @@ client = discord.Client()
 
 quotes = {"mentionNeng": "叫我的僕人做莫",
           "mentionShan": "Reply please",
-          "reply": "Reply 你毛啊",
-          "mentionBot": ["Yes~ 寶貝？", "什麽事情啊~ 親？", "叫我嗎~ 親愛的？"]}
+          "reply": "What should I reply?",
+          "mentionBot": ["Why do you tag me?", "什麽事情啊？", "叫我嗎？"]}
 
 channel_id = 692783419553218570
 berd_id = f"<@!353165739852693506>"
@@ -60,6 +62,8 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
+    if "hello" in message.content.lower().split():
+        await message.channel.send("Hi! I am a discord bot created by Bernard!")
 
     if message.author == client.user:
         return
