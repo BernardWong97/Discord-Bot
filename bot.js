@@ -1,7 +1,8 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 
-client.login("Nzg4Njg0NDUyNTk4OTA2OTMx.X9nFog.ps7M5dO0h72cSckzappjf3ULtDI");
+require("dotenv").config();
+client.login(process.env.TOKEN);
 
 process.stdout.write('Warming up Bok Bok Geh');
 var interval = setInterval(()=>{
@@ -18,7 +19,11 @@ client.on('ready', () => {
 client.on('message', gotMessage);
 
 function gotMessage(msg) {
-    if(msg.channel.id == '788685165240516609' && msg.content === 'test'){
+    if (msg.author == client.user){
+        return;
+    }
+
+    if(msg.channel.id == '788685165240516609' && msg.content.toLowerCase().localeCompare('test') == 0){
         msg.reply('hello');
     }
 }
