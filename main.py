@@ -20,44 +20,14 @@ quotes = {"mentionNeng": "叫我的僕人做莫",
           "mentionShan": "Reply please",
           "reply": "What should I reply?",
           "mentionBot": ["Why do you tag me?", "什麽事情啊？", "叫我嗎？"]}
-
-channel_id = 692783419553218570
+          
 berd_id = f"<@!353165739852693506>"
 neng_id = f"<@!474156371147882508>"
 shanni_id = f"<@!356045052604317697>"
 
-alarm = "16:00"
-
-
-async def time_check():
-    await client.wait_until_ready()
-    channel = client.get_channel(channel_id)
-    alarm_bool = True
-
-    while not client.is_closed():
-        try:
-            message = "@everyone 起來小便咯!"
-            time_format = "%H:%M"
-            now = datetime.strftime(datetime.now(), time_format)
-            diff = (datetime.strptime(alarm, time_format) - datetime.strptime(now, time_format)).total_seconds()
-
-            if diff == 0 and alarm_bool:
-                alarm_bool = False
-                await channel.send(message)
-
-            if diff != 0:
-                alarm_bool = True
-
-            await asyncio.sleep(1)
-        except Exception as e:
-            print(str(e))
-            await asyncio.sleep(1)
-
-
 @client.event
 async def on_ready():
     print('Bot online as {0.user}'.format(client))
-    client.loop.create_task(time_check())
 
 
 @client.event

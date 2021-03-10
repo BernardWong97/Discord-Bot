@@ -27,6 +27,7 @@ client.on('ready', () => {
     cronJob.start();
 });
 
+// Listen for messages
 client.on('message', commandHandler);
 
 function wake_up(){
