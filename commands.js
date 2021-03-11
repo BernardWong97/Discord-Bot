@@ -17,7 +17,7 @@ module.exports = async function (message) {
     if(message.content.includes("@here") || message.content.includes("@everyone")) return;
 
     // If message is all chat channel
-    if(message.channel.id == process.env.TESTCHANNEL){
+    if(message.channel.id == process.env.ALLCHATCHANNEL || message.channel.id == process.env.TESTCHANNEL){
         // Save each incoming message words into the element of splitted variable.
         var splitted = message.content.split(" ");
 
@@ -30,7 +30,7 @@ module.exports = async function (message) {
         }
 
         // Check if message has commands
-        if(message.channel.id == process.env.ALLCHATCHANNEL || message.mentions.has(process.env.BOTID) && splitted != 0){
+        if(message.mentions.has(process.env.BOTID) && splitted != 0){
             var command = splitted[0].toLowerCase();
 
             if(command in commands){
