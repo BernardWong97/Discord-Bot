@@ -1,11 +1,13 @@
 const mentions = require('./commands/mentions');
 const gif = require('./commands/gif');
 const send = require('./commands/send');
+const del = require('./commands/delete');
 
 const commands = {
     mentions,
     gif,
-    send
+    send,
+    "delete": del
 }
 
 module.exports = async function (message) {

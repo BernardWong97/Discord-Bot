@@ -7,6 +7,7 @@ module.exports = function(message, splitted) {
         word = splitted.slice(2, splitted.length).join(" ");
     }
     
+    // Send message to the channel
     try{
         var channel = client.channels.cache.get(channel_id);
         channel.send(word);
