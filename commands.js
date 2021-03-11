@@ -16,6 +16,9 @@ module.exports = async function (message) {
     // If message is mentioning everyone, ignores
     if(message.content.includes("@here") || message.content.includes("@everyone")) return;
 
+    // If inline reply, ignores
+    if(message.reference != null) return;
+
     // If message is all chat channel
     if(message.channel.id == process.env.ALLCHATCHANNEL || message.channel.id == process.env.TESTCHANNEL){
         // Save each incoming message words into the element of splitted variable.
