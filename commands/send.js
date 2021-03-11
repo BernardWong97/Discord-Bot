@@ -7,6 +7,11 @@ module.exports = function(message, splitted) {
         word = splitted.slice(2, splitted.length).join(" ");
     }
     
-    var channel = client.channels.cache.get(channel_id);
-    channel.send(word);
+    try{
+        var channel = client.channels.cache.get(channel_id);
+        channel.send(word);
+    } catch (err){
+        message.channel.send("No such channel exists.");
+    }
+    
 }
