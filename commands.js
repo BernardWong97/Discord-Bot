@@ -1,9 +1,9 @@
-const fetch = require('node-fetch');
 const mentions = require('./commands/mentions');
+const gif = require('./commands/gif');
 
 const commands = {
     mentions,
-    gifs
+    gif
 }
 
 module.exports = async function (message) {
@@ -19,12 +19,16 @@ module.exports = async function (message) {
         var splitted = message.content.toLowerCase().split(" ");
 
         // Remove the first element
-        var id = splitted.shift();
+        splitted.shift();
 
-        mentions(message, splitted);
+        // Check if message has mentions
+        if(message.mentions.members.first()){
+            mentions(message, splitted);
+        }
 
-        // Execute commands
-        var command = "gifs";
-        commands[command](message, splitted);
+        // Check if message has commands
+        if(message.mentions.has(process.env.BOTID) && splitted != 0){
+            commands[splitted[0]](message, splitted);
+        }
     }
 }

@@ -16,14 +16,13 @@ module.exports = function(message, splitted) {
     }
 
     // If message only mention bot without any more words
-    if(message.mentions.has(process.env.BOTID)){
+    if(message.mentions.has(process.env.BOTID) && splitted.length == 0){
         if(message.author.id != process.env.NENGID){
             sendQuote(quotes["mentionBot"]);
         }
         else{
             sendQuote(quotes["mentionBotNeng"]);
         }
-
     }
 
     // Mention Berd
