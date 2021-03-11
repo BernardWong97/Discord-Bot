@@ -1,9 +1,11 @@
 const mentions = require('./commands/mentions');
 const gif = require('./commands/gif');
+const send = require('./commands/send');
 
 const commands = {
     mentions,
-    gif
+    gif,
+    send
 }
 
 module.exports = async function (message) {
@@ -16,7 +18,7 @@ module.exports = async function (message) {
     // If message is test channel
     if(message.channel.id == process.env.TESTCHANNEL){
         // Save each incoming message words into the element of splitted variable.
-        var splitted = message.content.toLowerCase().split(" ");
+        var splitted = message.content.split(" ");
 
         // Remove the first element
         splitted.shift();
@@ -28,7 +30,7 @@ module.exports = async function (message) {
 
         // Check if message has commands
         if(message.mentions.has(process.env.BOTID) && splitted != 0){
-            commands[splitted[0]](message, splitted);
+            commands[splitted[0].toLowerCase()](message, splitted);
         }
     }
 }

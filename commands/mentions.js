@@ -35,6 +35,7 @@ module.exports = function(message, splitted) {
     userMention(process.env.SHANNIID, "mentionShanni");
 
     function userMention(id, quoteKey){
+        // If mention matches id, send quote
         if(message.mentions.has(id)){
             sendQuote(quotes[quoteKey]);
         }

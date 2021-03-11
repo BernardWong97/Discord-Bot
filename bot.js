@@ -5,7 +5,7 @@ const cron = require('cron');
 require("dotenv").config();
 
 // Instantiate
-const client = new Discord.Client();
+global.client = new Discord.Client();
 
 // Login
 client.login(process.env.TOKEN);

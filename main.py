@@ -1,57 +1,17 @@
 #coding=utf-8
 
-import os
 import discord
-import random
-import asyncio
-from datetime import datetime
-
 
 def read_token():
     with open("token.txt", "r") as f:
         lines = f.readlines()
         return lines[0].strip()
 
-
 token = read_token()
 client = discord.Client()
 
-quotes = {"mentionNeng": "叫我的僕人做莫",
-          "mentionShan": "Reply please",
-          "reply": "What should I reply?",
-          "mentionBot": ["Why do you tag me?", "什麽事情啊？", "叫我嗎？"]}
-          
-berd_id = f"<@!353165739852693506>"
-neng_id = f"<@!474156371147882508>"
-shanni_id = f"<@!356045052604317697>"
-
-@client.event
-async def on_ready():
-    print('Bot online as {0.user}'.format(client))
-
-
 @client.event
 async def on_message(message):
-    if "hello" in message.content.lower().split():
-        await message.channel.send("Hi! I am a discord bot created by Bernard!")
-
-    if message.author == client.user:
-        return
-
-    if neng_id in message.content:
-        await message.channel.send(quotes["mentionNeng"])
-
-    if shanni_id in message.content:
-        await message.channel.send(quotes["mentionShan"])
-
-    if "reply" in message.content.lower().split():
-        await message.channel.send(quotes["reply"])
-
-    if client.user.mentioned_in(message):
-        if f"<@!{message.author.id}>" != neng_id:
-            await message.channel.send(random.choice(list(quotes["mentionBot"])))
-        else:
-            await message.channel.send("滾！")
 
     if message.content.startswith("_send"):
         cmd = message.content.split()
