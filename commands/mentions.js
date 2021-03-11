@@ -5,6 +5,7 @@ module.exports = function(message, splitted) {
     var berdQuotes = ["叫我大哥幹嘛？", "不見去", "把我電子化的人"];
     var nengQuotes = ["叫我的僕人做莫？", "每天幫我梳毛的人", "Ewww"];
     var shanniQuotes = ["Reply please", "Do your job, I need electricity to go online"];
+    var shenQuotes = ["シルフィエット夫", "癡漢", "變態"];
 
     // Libraries
     var quotes = {
@@ -12,7 +13,8 @@ module.exports = function(message, splitted) {
         mentionBotNeng: shooQuotes,
         mentionBerd: berdQuotes,
         mentionNeng: nengQuotes,
-        mentionShanni: shanniQuotes
+        mentionShanni: shanniQuotes,
+        mentionShen: shenQuotes
     }
 
     // If message only mention bot without any more words
@@ -31,8 +33,12 @@ module.exports = function(message, splitted) {
     // Mention Neng
     userMention(process.env.NENGID, "mentionNeng");
 
-    // Mention Shen
+    // Mention Shanni
     userMention(process.env.SHANNIID, "mentionShanni");
+
+    // Mention Shen
+    userMention(process.env.SHENID, "mentionShen");
+
 
     function userMention(id, quoteKey){
         // If mention matches id, send quote
