@@ -6,7 +6,6 @@ const del = require('./commands/delete');
 const commands = {
     mentions,
     gif,
-    send,
     "delete": del
 }
 
@@ -17,7 +16,7 @@ module.exports = async function (message) {
     // If message is mentioning everyone, ignores
     if(message.content.includes("@here") || message.content.includes("@everyone")) return;
 
-    // If message is test channel
+    // If message is all chat channel
     if(message.channel.id == process.env.TESTCHANNEL){
         // Save each incoming message words into the element of splitted variable.
         var splitted = message.content.split(" ");
@@ -31,8 +30,17 @@ module.exports = async function (message) {
         }
 
         // Check if message has commands
-        if(message.mentions.has(process.env.BOTID) && splitted != 0){
-            commands[splitted[0].toLowerCase()](message, splitted);
+        if(message.channel.id == process.env.ALLCHATCHANNEL || message.mentions.has(process.env.BOTID) && splitted != 0){
+            var command = splitted[0].toLowerCase();
+
+            if(command in commands){
+                commands[splitted[0].toLowerCase()](message, splitted);
+            } else if(message.channel.id == process.env.TESTCHANNEL && splitted[0].toLowerCase() == "send"){
+                send(message, splitted);
+            } else{
+                message.channel.send(`No command \"${command}\" exists`);
+            }
+
         }
     }
 }

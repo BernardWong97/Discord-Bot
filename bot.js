@@ -31,7 +31,7 @@ client.on('ready', () => {
 client.on('message', commandHandler);
 
 function wake_up(){
-    // CHANGE TEST CHANNEL TO ALL CHAT CHANNEL
-    var channel = client.channels.cache.get(process.env.TESTCHANNEL);
+    // WAKE UP
+    var channel = client.channels.cache.get(process.env.ALLCHATCHANNEL);
     channel.send("@everyone BOK BOK BOK WAKE UP!");
 }
