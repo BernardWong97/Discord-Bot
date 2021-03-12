@@ -2,7 +2,7 @@ module.exports = function(message, splitted) {
     // Quotes
     var selfQuotes = ["Why do you tag me?", "什麽事情啊？親？", "叫我嗎, 寶貝?", "😘", "❤️"];
     var shooQuotes = ["滾!", "走開", "不要叫我", "打擾貴人吃玉米你想被啄嗎？", "💩"];
-    var berdQuotes = ["叫我大哥幹嘛？", "不見去", "把我電子化的人"];
+    var berdQuotes = ["叫我大哥幹嘛？", "https://tenor.com/4Bne.gif", "把我電子化的人"];
     var nengQuotes = ["叫我的僕人做莫？", "每天幫我梳毛的人", "Ewww"];
     var shanniQuotes = ["Reply please", "Do your job, I need electricity to go online"];
     var shenQuotes = ["シルフィエット夫", "癡漢", "變態"];
@@ -18,7 +18,7 @@ module.exports = function(message, splitted) {
     }
 
     // If message only mention bot without any more words
-    if(message.mentions.has(process.env.BOTID) && splitted.length == 0){
+    if(message.mentions.has(process.env.BOTID) && splitted.length == 0){ // !!! CHANGE ID HERE FOR TESTING !!!
         if(message.author.id != process.env.NENGID){
             sendQuote(quotes["mentionBot"]);
         }
@@ -26,6 +26,8 @@ module.exports = function(message, splitted) {
             sendQuote(quotes["mentionBotNeng"]);
         }
     }
+
+    var found = false;
 
     // Mention Berd
     userMention(process.env.BERDID, "mentionBerd");
@@ -39,11 +41,16 @@ module.exports = function(message, splitted) {
     // Mention Shen
     userMention(process.env.SHENID, "mentionShen");
 
+    // If mentioned user not in library, send quote
+    if(!found){
+        message.channel.send(`<@${process.env.BERDID}> 沒有教我要怎樣應gok...`);
+    }
 
     function userMention(id, quoteKey){
         // If mention matches id, send quote
         if(message.mentions.has(id)){
             sendQuote(quotes[quoteKey]);
+            found = true;
         }
     }
 

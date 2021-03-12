@@ -8,7 +8,7 @@ require("dotenv").config();
 global.client = new Discord.Client();
 
 // Login
-client.login(process.env.TOKEN);
+client.login(process.env.TOKEN); // !!! CHANGE TOKEN HERE FOR TESTING !!!
 
 // Terminal debug
 process.stdout.write('Warming up Bok Bok Geh');
