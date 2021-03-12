@@ -5,7 +5,7 @@ module.exports = function(message, splitted) {
     var berdQuotes = ["叫我大哥幹嘛？", "https://tenor.com/4Bne.gif", "把我電子化的人"];
     var nengQuotes = ["叫我的僕人做莫？", "每天幫我梳毛的人", "Ewww"];
     var shanniQuotes = ["Reply please", "Do your job, I need electricity to go online"];
-    var shenQuotes = ["シルフィエット夫", "癡漢", "變態"];
+    var shenQuotes = ["シルフィエット夫", "癡漢", "變態", "https://tenor.com/view/mushoku-tensei-mushoku-tensei-isekai-anime-gif-20583298"];
 
     // Libraries
     var quotes = {
