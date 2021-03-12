@@ -24,8 +24,13 @@ module.exports = async function (message) {
         // Save each incoming message words into the element of splitted variable.
         var splitted = message.content.split(" ");
 
-        // Remove the first element
+        // Remove the first element (the mention)
         splitted.shift();
+
+        // Remove noises (white spaces)
+        while(splitted[0] == ""){
+            splitted.shift();
+        }
 
         // Check if message has mentions
         if(message.mentions.members.first()){

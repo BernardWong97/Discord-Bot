@@ -17,6 +17,8 @@ module.exports = function(message, splitted) {
         mentionShen: shenQuotes
     }
 
+    var found = false;
+
     // If message only mention bot without any more words
     if(message.mentions.has(process.env.BOTID) && splitted.length == 0){ // !!! CHANGE ID HERE FOR TESTING !!!
         if(message.author.id != process.env.NENGID){
@@ -25,9 +27,12 @@ module.exports = function(message, splitted) {
         else{
             sendQuote(quotes["mentionBotNeng"]);
         }
-    }
 
-    var found = false;
+        found = true;
+    // If message mention bot in general
+    } else if(message.mentions.has(process.env.BOTID)){ // !!! CHANGE ID HERE FOR TESTING !!!
+        found = true;
+    }
 
     // Mention Berd
     userMention(process.env.BERDID, "mentionBerd");
