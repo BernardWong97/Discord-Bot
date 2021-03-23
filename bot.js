@@ -23,13 +23,14 @@ client.on('ready', () => {
     process.stdout.write(`\nLogged in as ${client.user.tag}!\n`);
     process.stdout.write('Bok Bok Geh is listening for Discord messages!\n');
 
-    // Daily interval job
+    // Daily interval jobs
+    // Morning call
     var morningCall = new cron.CronJob('00 00 06 * * *', wake_up);
     morningCall.start();
 
-    // var birthdayCall = new cron.CronJob('00 00 00 * * *', birthday);
-    // birthdayCall.start();
-    birthday();
+    // Check happy birthday
+    var birthdayCall = new cron.CronJob('00 00 00 * * *', birthday);
+    birthdayCall.start();
 });
 
 // Listen for messages
@@ -46,7 +47,7 @@ function birthday(){
     var date = new Date();
     var today = new Date(date.getTime() - (date.getTimezoneOffset() * 60000)).toISOString().split("T")[0].slice(5);
 
-    // Connect to MYSQL
+    // Establish connection
     var conn = mysql.createConnection({
         host: process.env.MYSQLHOST,
         user: process.env.MYSQLUSER,
@@ -54,22 +55,21 @@ function birthday(){
         database: process.env.MYSQLDB
     });
 
-    today = "06-05";
-
+    // Connected to MYSQL
     conn.connect(err => {
         if(err) return console.log(err);
 
-        console.log("Connected to MYSQL");
-
+        // Send MYSQL Query to MYSQL
         conn.query(`SELECT * FROM ${process.env.MYSQLTABLE} WHERE dob LIKE "%${today}"`, (err, res, fields) => {
             if(err) return console.log(err);
 
+            // For each birthday people, wish them happy birthday
             res.forEach(member => {
                 date = new Date(member.dob);
                 var birthdate = new Date(date.getTime() - (date.getTimezoneOffset() * 60000)).toISOString().split("T")[0].slice(5);
 
                 if(birthdate == today){
-                    var channel = client.channels.cache.get(process.env.TESTCHANNEL);
+                    var channel = client.channels.cache.get(process.env.ALLCHATCHANNEL);
                     channel.send(`Happy Birthday <@${member.id}> !!!`);
                     channel.send('https://tenor.com/bjZJy.gif');
                 }
