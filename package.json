@@ -4,7 +4,7 @@
   "description": "Bok Bok Geh Discord Bot",
   "main": "bot.js",
   "scripts": {
-    "start": "node bot.js"
+    "start": "nodemon bot.js"
   },
   "repository": {
     "type": "git",

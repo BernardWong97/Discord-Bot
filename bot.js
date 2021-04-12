@@ -74,6 +74,8 @@ function birthday(){
                     channel.send('https://tenor.com/bjZJy.gif');
                 }
             });
+
+	    conn.end();
         });
     });
 }
