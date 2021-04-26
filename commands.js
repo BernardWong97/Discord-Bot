@@ -38,7 +38,7 @@ module.exports = async function (message) {
         }
 
         // Check if message has commands
-        if(message.mentions.has(process.env.BOTID) && splitted != 0){ // !!! CHANGE ID HERE FOR TESTING !!!
+        if(message.mentions.has(process.env.BOTID) && splitted != 0){
             var command = splitted[0].toLowerCase();
 
             if(command in commands){

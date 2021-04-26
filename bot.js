@@ -9,7 +9,7 @@ require("dotenv").config();
 global.client = new Discord.Client();
 
 // Login
-client.login(process.env.TOKEN); // !!! CHANGE TOKEN HERE FOR TESTING !!!
+client.login(process.env.TOKEN);
 
 // Terminal debug
 process.stdout.write('Warming up Bok Bok Geh');
@@ -38,8 +38,12 @@ client.on('message', commandHandler);
 
 function wake_up(){
     // WAKE UP
-    var channel = client.channels.cache.get(process.env.ALLCHATCHANNEL);
-    channel.send("@everyone BOK BOK BOK WAKE UP!");
+    var today = new Date().getDay()
+
+    // Check for weekdays
+    if(today > 0 && today < 6)
+        var channel = client.channels.cache.get(process.env.ALLCHATCHANNEL);
+        channel.send("@everyone BOK BOK BOK WAKE UP!");
 }
 
 function birthday(){
