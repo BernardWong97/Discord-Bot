@@ -26,11 +26,11 @@ client.on('ready', () => {
 
     // Daily interval jobs
     // Morning call
-    var morningCall = new cron.CronJob('00 00 06 * * *', wake_up(channel));
+    var morningCall = new cron.CronJob('00 00 06 * * *', ()=>wake_up(channel));
     morningCall.start();
 
     // Check happy birthday
-    var birthdayCall = new cron.CronJob('00 00 00 * * *', birthday(channel));
+    var birthdayCall = new cron.CronJob('00 00 00 * * *', ()=>birthday(channel));
     birthdayCall.start();
 });
 
