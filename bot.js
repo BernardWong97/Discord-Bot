@@ -22,31 +22,31 @@ client.on('ready', () => {
     client.clearInterval(interval);
     process.stdout.write(`\nLogged in as ${client.user.tag}!\n`);
     process.stdout.write('Bok Bok Geh is listening for Discord messages!\n');
+    const channel = client.channels.cache.get(process.env.ALLCHATCHANNEL);
 
     // Daily interval jobs
     // Morning call
-    var morningCall = new cron.CronJob('00 00 06 * * *', wake_up);
+    var morningCall = new cron.CronJob('00 00 06 * * *', wake_up(channel));
     morningCall.start();
 
     // Check happy birthday
-    var birthdayCall = new cron.CronJob('00 00 00 * * *', birthday);
+    var birthdayCall = new cron.CronJob('00 00 00 * * *', birthday(channel));
     birthdayCall.start();
 });
 
 // Listen for messages
 client.on('message', commandHandler);
 
-function wake_up(){
+function wake_up(channel){
     // WAKE UP
     var today = new Date().getDay()
 
     // Check for weekdays
     if(today > 0 && today < 6)
-        var channel = client.channels.cache.get(process.env.ALLCHATCHANNEL);
         channel.send("@everyone BOK BOK BOK WAKE UP!");
 }
 
-function birthday(){
+function birthday(channel){
     // HAPPY BIRTHDAY
     var date = new Date();
     var today = new Date(date.getTime() - (date.getTimezoneOffset() * 60000)).toISOString().split("T")[0].slice(5);
@@ -73,7 +73,6 @@ function birthday(){
                 var birthdate = new Date(date.getTime() - (date.getTimezoneOffset() * 60000)).toISOString().split("T")[0].slice(5);
 
                 if(birthdate == today){
-                    var channel = client.channels.cache.get(process.env.ALLCHATCHANNEL);
                     channel.send(`Happy Birthday <@${member.id}> !!!`);
                     channel.send('https://tenor.com/bjZJy.gif');
                 }
