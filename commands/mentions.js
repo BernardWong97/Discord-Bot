@@ -1,3 +1,5 @@
+const { MessageAttachment } = require("discord.js");
+
 module.exports = function(message, splitted) {
     // Quotes
     var selfQuotes = ["Why do you tag me?", "什麽事情啊？親？", "叫我嗎, 寶貝?", "😘", "❤️"];
@@ -7,7 +9,7 @@ module.exports = function(message, splitted) {
     var shanniQuotes = ["Reply please", "Do your job, I need electricity to go online", "Gorgc's child"];
     var shenQuotes = ["シルフィエットの夫", "癡漢", "變態", "https://tenor.com/view/mushoku-tensei-mushoku-tensei-isekai-anime-gif-20583298"];
     var cicakQuotes = ["https://10yearchallenge.files.wordpress.com/2012/05/henhunter2.jpg", "https://tenor.com/48mx.gif", "我最愛的食物"];
-    var marvinQuotes = ["討人tips的人", "黏土人比朋友還多", "初級演員", "機械三幻神持有者"];
+    var marvinQuotes = ["討人tips的人", "黏土人比朋友還多", "初級演員", "Attachment-marvinbest.gif"];
     var shangQuotes = ["即是小丑，即是演員", "🤡", "https://tenor.com/6nYf.gif"]
 
     // Libraries
@@ -66,6 +68,13 @@ module.exports = function(message, splitted) {
         // Select a random quote from library and send
         var random = Math.floor(Math.random() * arr.length);
         var quote = arr[random];
+
+        if(String(quote).startsWith("Attachment")){
+            var fileName = String(quote).split("-")[1];
+            quote = new MessageAttachment("./attachments/" + fileName)
+        }
+            
+
         message.channel.send(quote);
     }
 }
