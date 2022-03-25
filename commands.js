@@ -21,7 +21,7 @@ module.exports = async function (message) {
 
     // If message is all chat channel
     if(message.channel.id == process.env.ALLCHATCHANNEL || message.channel.id == process.env.TESTCHANNEL){
-        // Save each incoming message words into the element of splitted variable.
+        // Save each incoming message words into the element of splitted variable
         var splitted = message.content.split(" ");
 
         // Remove the first element (the mention)
@@ -33,12 +33,12 @@ module.exports = async function (message) {
         }
 
         // Check if message has mentions
-        if(message.mentions.members.first()){
+        message.mentions.members.forEach( _ => {
             mentions(message, splitted);
-        }
+        });
 
-        // Check if message has commands
-        if(message.mentions.has(process.env.BOTID) && splitted != 0){
+        // Check if message has commands, skip if bot is mentioned later in the message
+        if(message.mentions.has(process.env.BOTID) && splitted != 0 && !splitted.includes("<@!" + process.env.BOTID + ">")){
             var command = splitted[0].toLowerCase();
 
             if(command in commands){

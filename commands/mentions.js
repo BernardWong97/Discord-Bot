@@ -29,8 +29,8 @@ module.exports = function(message, splitted) {
 
     var found = false;
 
-    // If message only mention bot without any more words
-    if(message.mentions.has(process.env.BOTID) && splitted.length == 0){
+    // If message mention bot without command
+    if(message.mentions.has(process.env.BOTID) && (splitted.includes("<@!" + process.env.BOTID + ">") || splitted.length == 0)){
         if(message.author.id != process.env.NENGID){
             sendQuote(quotes["mentionBot"]);
         }
