@@ -11,6 +11,7 @@ module.exports = function(message, splitted) {
     var cicakQuotes = ["https://10yearchallenge.files.wordpress.com/2012/05/henhunter2.jpg", "https://tenor.com/48mx.gif", "我最愛的食物"];
     var marvinQuotes = ["討人tips的人", "黏土人比朋友還多", "初級演員", "Attachment-marvinbest.gif"];
     var shangQuotes = ["即是小丑，即是演員", "🤡", "https://tenor.com/6nYf.gif"]
+    var boyQuotes = ["我以爲我們失去你了"]
 
     // Libraries
     var quotes = {
@@ -22,7 +23,8 @@ module.exports = function(message, splitted) {
         mentionShen: shenQuotes,
         mentionCicak: cicakQuotes,
         mentionMarvin: marvinQuotes,
-        mentionShang: shangQuotes
+        mentionShang: shangQuotes,
+        mentionBoy: boyQuotes
     }
 
     var found = false;
@@ -50,6 +52,7 @@ module.exports = function(message, splitted) {
     userMention(process.env.CICAKID, "mentionCicak");
     userMention(process.env.MARVINID, "mentionMarvin");
     userMention(process.env.SHANGID, "mentionShang");
+    userMention(process.env.BOYID, "mentionBoy");
 
     // If mentioned user not in library, send quote
     if(!found){
