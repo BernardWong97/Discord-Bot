@@ -2,6 +2,7 @@ const mentions = require('./commands/mentions');
 const gif = require('./commands/gif');
 const send = require('./commands/send');
 const del = require('./commands/delete');
+const anime = require('./commands/anime');
 
 const commands = {
     mentions,
@@ -49,6 +50,39 @@ module.exports = async function (message) {
                 message.channel.send(`No command \"${command}\" exists`);
             }
 
+        }
+    }
+
+    // If message is anime chat channel
+    if(message.channel.id == process.env.ANIMECHANNEL) {
+        // Save each incoming message words into the element of splitted variable
+        var splitted = message.content.split(" ");
+
+        // Remove the first element (the mention)
+        splitted.shift();
+
+        // Remove noises (white spaces)
+        while(splitted[0] == ""){
+            splitted.shift();
+        }
+
+        // Check if message has commands, skip if bot is mentioned later in the message
+        if(message.mentions.has(process.env.BOTID) && splitted != 0 && !splitted.includes("<@!" + process.env.BOTID + ">")){
+            var command = splitted[0].toLowerCase();
+
+            switch(command) {
+                case "anime":
+                    anime(message, splitted);
+                    break;
+                case "gif":
+                    gif(message, splitted);
+                    break;
+                case "delete":
+                    del(message, splitted);
+                    break;
+                default:
+                    message.channel.send(`No command \"${command}\" exists`);
+            }
         }
     }
 }

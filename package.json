@@ -18,12 +18,12 @@
   "homepage": "https://github.com/BernardWong97/Discord-Bot#readme",
   "dependencies": {
     "cron": "^1.8.2",
-    "discord.js": "^12.5.1",
+    "discord.js": "^13.6.0",
     "dotenv": "^8.2.0",
     "mysql": "^2.18.1",
-    "node": "^15.10.0",
+    "node": "^17.7.1",
     "node-fetch": "^2.6.1",
-    "nodemon": "^2.0.7",
-    "npm": "^7.6.3"
+    "nodemon": "^2.0.15",
+    "npm": "^8.5.5"
   }
 }

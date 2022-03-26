@@ -6,20 +6,17 @@ const mysql = require('mysql');
 require("dotenv").config();
 
 // Instantiate
-global.client = new Discord.Client();
+global.client = new Discord.Client({ intents: [Discord.Intents.FLAGS.GUILDS, Discord.Intents.FLAGS.GUILD_MESSAGES] });
 
 // Login
 client.login(process.env.TOKEN);
 
 // Terminal debug
+process.traceDeprecation = true;
 process.stdout.write('Warming up Bok Bok Geh');
-var interval = client.setInterval(()=>{
-    process.stdout.write(".");
-}, 500);
 
 // Logged in
 client.on('ready', () => {
-    client.clearInterval(interval);
     process.stdout.write(`\nLogged in as ${client.user.tag}!\n`);
     process.stdout.write('Bok Bok Geh is listening for Discord messages!\n');
     const channel = client.channels.cache.get(process.env.ALLCHATCHANNEL);
@@ -35,7 +32,7 @@ client.on('ready', () => {
 });
 
 // Listen for messages
-client.on('message', commandHandler);
+client.on('messageCreate', commandHandler);
 
 function wake_up(channel){
     // WAKE UP
