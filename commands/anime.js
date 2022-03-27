@@ -50,7 +50,7 @@ module.exports = async function(message, splitted){
     // Send loading message then pull data and send each embed anime messages
     message.channel.send({embeds: [heheBoi]}).then( async gifMessage => {
         // Fetch API url
-        var response = await fetch(selectedUrl);
+        var response = await fetch(encodeURI(selectedUrl));
         var json = await response.json();
         var embedMsgArray = [];
 
@@ -59,15 +59,15 @@ module.exports = async function(message, splitted){
 
         if(isSearch) {
             headerTitle = `${splitted.join(" ")} Anime Search Result`;
-            headerUrl = url["searchMain"] + splitted.join("%20") + "&cat=anime";
+            headerUrl = url["searchMain"] + splitted.join(" ") + "&cat=anime";
         }
 
         // First header message
         var titleMessage = new MessageEmbed()
             .setColor("0000FF")
             .setTitle(headerTitle)
-            .setURL(headerUrl)
-            .setAuthor({ name: 'MyAnimeList', iconURL: 'https://cdn.myanimelist.net/img/sp/icon/apple-touch-icon-256.png', url: url["main"] + `${res["year"]}/${res["season"]}` });
+            .setURL(encodeURI(headerUrl))
+            .setAuthor({ name: 'MyAnimeList', iconURL: 'https://cdn.myanimelist.net/img/sp/icon/apple-touch-icon-256.png', url: encodeURI(url["main"]) + `${res["year"]}/${res["season"]}` });
 
         // Slice data to 10 entries
         jsonData = json.data.slice(0, 10);
@@ -232,7 +232,7 @@ module.exports = async function(message, splitted){
                 {name: "Members", value: anime["members"].toString(), inline: true},
                 {name: "Favorites", value: anime["favorites"].toString(), inline: true}
             )
-            .setURL(anime["url"])
+            .setURL(encodeURI(anime["url"]))
             .setImage(anime["images"]["jpg"]["image_url"])
             .setFooter({text: get_date(anime["aired"]["from"]) + " - " + get_date(anime["aired"]["to"])});
 
