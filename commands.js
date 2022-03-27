@@ -3,6 +3,7 @@ const gif = require('./commands/gif');
 const send = require('./commands/send');
 const del = require('./commands/delete');
 const anime = require('./commands/anime');
+const { cp } = require('fs');
 
 const commands = {
     mentions,
@@ -66,22 +67,14 @@ module.exports = async function (message) {
             splitted.shift();
         }
 
-        // Check if message has commands, skip if bot is mentioned later in the message
-        if(message.mentions.has(process.env.BOTID) && splitted != 0 && !splitted.includes("<@!" + process.env.BOTID + ">")){
-            var command = splitted[0].toLowerCase();
+        // Check if message has bot mention, skip if bot is mentioned later in the message
+        if(message.mentions.has(process.env.BOTID) && !splitted.includes("<@!" + process.env.BOTID + ">")){
 
-            switch(command) {
-                case "anime":
-                    anime(message, splitted);
-                    break;
-                case "gif":
-                    gif(message, splitted);
-                    break;
-                case "delete":
-                    del(message, splitted);
-                    break;
-                default:
-                    message.channel.send(`No command \"${command}\" exists`);
+            // Call delete function if the following command is delete
+            if(splitted.length != 0 && splitted[0].toLowerCase() == "delete") {
+                del(message, splitted);
+            } else {
+                anime(message, splitted);
             }
         }
     }

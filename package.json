@@ -19,7 +19,7 @@
   "dependencies": {
     "cron": "^1.8.2",
     "discord.js": "^13.6.0",
-    "dotenv": "^8.2.0",
+    "dotenv": "^16.0.0",
     "mysql": "^2.18.1",
     "node": "^17.7.1",
     "node-fetch": "^2.6.1",
