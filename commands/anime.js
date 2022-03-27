@@ -212,12 +212,19 @@ module.exports = async function(message, splitted){
             author = {name: anime["studios"][0]["name"], url: anime["studios"][0]["url"]};
         }
 
+        // Trim description
+        var description = anime["synopsis"].split(" ").slice(0, 50).join(" ");
+
+        if(anime["synopsis"].split(" ").length > 50) {
+            description += "...";
+        }
+
         // Create embed message for each anime
         var embedMessage = new MessageEmbed()
             .setColor("#FF0000")
             .setAuthor(author)
             .setTitle(anime["title"])
-            .setDescription(anime["title_japanese"] + "\n" + anime["title_english"] + "\n\n" + anime["synopsis"].split(" ").slice(0, 50).join(" ") + "...")
+            .setDescription(anime["title_japanese"] + "\n" + anime["title_english"] + "\n\n" + description)
             .addFields(
                 {name: "Episodes", value: anime["episodes"].toString()},
                 {name: "Duration", value: anime["duration"]},

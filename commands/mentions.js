@@ -10,8 +10,10 @@ module.exports = function(message, splitted) {
     var shenQuotes = ["シルフィエットの夫", "癡漢", "變態", "https://tenor.com/view/mushoku-tensei-mushoku-tensei-isekai-anime-gif-20583298"];
     var cicakQuotes = ["https://10yearchallenge.files.wordpress.com/2012/05/henhunter2.jpg", "https://tenor.com/48mx.gif", "我最愛的食物"];
     var marvinQuotes = ["討人tips的人", "黏土人比朋友還多", "初級演員", "Attachment-marvinbest.gif"];
-    var shangQuotes = ["即是小丑，即是演員", "🤡", "https://tenor.com/6nYf.gif"]
-    var boyQuotes = ["我以爲我們失去你了"]
+    var shangQuotes = ["即是小丑，即是演員", "🤡", "https://tenor.com/6nYf.gif"];
+    var boyQuotes = ["我以爲我們失去你了"];
+    var jingQuotes = ["https://tenor.com/bPpj4.gif", "3rd Mile need passport kah?", "三哩不在Sarawak"];
+    var benQuotes = ["BEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEN", "https://tenor.com/bv1Gh.gif", "Another Oscar Winner"]
 
     // Libraries
     var quotes = {
@@ -24,7 +26,9 @@ module.exports = function(message, splitted) {
         mentionCicak: cicakQuotes,
         mentionMarvin: marvinQuotes,
         mentionShang: shangQuotes,
-        mentionBoy: boyQuotes
+        mentionBoy: boyQuotes,
+        mentionJing: jingQuotes,
+        mentionBen: benQuotes,
     }
 
     var found = false;
@@ -53,6 +57,8 @@ module.exports = function(message, splitted) {
     userMention(process.env.MARVINID, "mentionMarvin");
     userMention(process.env.SHANGID, "mentionShang");
     userMention(process.env.BOYID, "mentionBoy");
+    userMention(process.env.JINGID, "mentionJing");
+    userMention(process.env.BENID, "mentionBen");
 
     // If mentioned user not in library, send quote
     if(!found){
