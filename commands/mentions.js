@@ -79,11 +79,10 @@ module.exports = function(message, splitted) {
         var quote = arr[random];
 
         if(String(quote).startsWith("Attachment")){
-            var fileName = String(quote).split("-")[1];
-            quote = new MessageAttachment("./attachments/" + fileName)
+            var fileName = "./attachments/" + String(quote).split("-")[1];
+            message.channel.send({ files: [fileName] })
+        } else {
+            message.channel.send(quote);
         }
-            
-
-        message.channel.send(quote);
     }
 }
