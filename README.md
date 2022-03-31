@@ -6,8 +6,8 @@
 
 <br />
 <div align="center">
-  <a href="https://github.com/BernardWong97/DiscordBot">
-    <img src="attachments/discord_logo.svg" alt="Logo" width="80" height="80">
+  <a href="https://discord.com">
+    <img src="https://discord.com/assets/3437c10597c1526c3dbd98c737c2bcae.svg" alt="Logo" width="80" height="80">
   </a>
 
   <h3 align="center">BokBokGeh Discord Bot</h3>
