@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/BernardWong97/Discord-Bot#readme",
   "dependencies": {
+    "cheerio": "^1.0.0-rc.10",
     "cron": "^1.8.2",
     "discord.js": "^13.6.0",
     "dotenv": "^16.0.0",

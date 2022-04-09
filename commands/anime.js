@@ -1,6 +1,5 @@
 const { MessageEmbed } = require('discord.js');
 const fetch = require('node-fetch');
-const { title } = require('process');
 
 module.exports = async function(message, splitted){
     var heheBoi = new MessageEmbed().setColor("#FF0000").setImage("https://media.giphy.com/media/dPEJxh06y4OTC/giphy.gif").setDescription("等我去偷數據。。。");

@@ -3,7 +3,7 @@ const gif = require('./commands/gif');
 const send = require('./commands/send');
 const del = require('./commands/delete');
 const anime = require('./commands/anime');
-const { cp } = require('fs');
+const fallout = require('./commands/fallout');
 
 const commands = {
     mentions,
@@ -75,6 +75,31 @@ module.exports = async function (message) {
                 del(message, splitted);
             } else {
                 anime(message, splitted);
+            }
+        }
+    }
+
+    // If message is fallout chat channel
+    if(message.channel.id == process.env.FALLOUTCHANNEL) {
+        // Save each incoming message words into the element of splitted variable
+        var splitted = message.content.split(" ");
+
+        // Remove the first element (the mention)
+        splitted.shift();
+
+        // Remove noises (white spaces)
+        while(splitted[0] == ""){
+            splitted.shift();
+        }
+
+        // Check if message has bot mention, skip if bot is mentioned later in the message
+        if(message.mentions.has(process.env.BOTID) && !splitted.includes("<@!" + process.env.BOTID + ">")){
+
+            // Call delete function if the following command is delete
+            if(splitted.length != 0 && splitted[0].toLowerCase() == "delete") {
+                del(message, splitted);
+            } else {
+                fallout(message);
             }
         }
     }
