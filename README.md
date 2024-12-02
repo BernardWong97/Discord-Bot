@@ -3,14 +3,15 @@
 [![LinkedIn][linkedin-shield]][linkedin-url]
 [![MIT License][license-shield]][license-url]
 
-
 <br />
 <div align="center">
   <a href="https://discord.com">
     <img src="https://discord.com/assets/3437c10597c1526c3dbd98c737c2bcae.svg" alt="Logo" width="80" height="80">
   </a>
 
-  <h3 align="center">BokBokGeh Discord Bot</h3>
+  <h3 align="center">BokBokGeh Discord Bot (Deprecated)</h3>
+
+  <h3>This repository is no longer maintained. Please visit the new version of the bot here: <a href="https://github.com/BernardWong97/Discord-Bot-V2">Discord Bot V2</a></h3>
 
   <p align="center">
     A personal Discord server's bot for fun.
